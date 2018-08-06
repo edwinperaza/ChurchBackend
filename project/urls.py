@@ -15,8 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from django.conf.urls import url
+from django.conf.urls import include
 
 urlpatterns = [
-    path('sermons/', include('sermons.urls')),
+    #path('sermons/', include('sermons.urls')),
+    url(r'^', include('sermons.urls')),
     path('admin/', admin.site.urls),
+    url(r'^api-auth/', include('rest_framework.urls'))
 ]
