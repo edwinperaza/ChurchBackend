@@ -62,6 +62,35 @@ class SerieDetail(APIView):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,
                       IsOwnerOrReadOnly,)
 
+class SermonList(APIView):
+    """ List all code series, or create a new sermon. """
+    def get(self, request, format=None):
+        
+        sermons = Sermon.objects.all()
+        serializer = SermonSerializer(sermons, many=True)
+        return Response(serializer.data)
+
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,
+                      IsOwnerOrReadOnly,)
+
+class SermonDetail(APIView):
+    """
+    Retrieve, update or delete a code sermon.
+    """
+    def get_object(self, pk):
+        try:
+            return Sermon.objects.get(pk=pk)
+        except Sermon.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk, format=None):
+        sermon = self.get_object(pk)
+        serializer = SermonSerializer(sermon)
+        return Response(serializer.data)
+    
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,
+                      IsOwnerOrReadOnly,)
+
 class UserList(generics.ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
