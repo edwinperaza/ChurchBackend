@@ -1,12 +1,12 @@
+"""Sermon app serializer"""
 from rest_framework import serializers
-from sermons.models import Serie, Sermon
 from django.contrib.auth.models import User
+from sermons.models import Serie, Sermon
 
 class SerieSerializer(serializers.ModelSerializer):
-    
+    """Serie serializer"""
     class Meta:
         model = Serie
-        owner = serializers.ReadOnlyField(source='owner.username')
         fields = (
             'title',
             'description',
@@ -16,10 +16,9 @@ class SerieSerializer(serializers.ModelSerializer):
 
 
 class SermonSerializer(serializers.ModelSerializer):
-    
+    """Sermon serializer"""
     class Meta:
         model = Sermon
-        #owner = serializers.ReadOnlyField(source='owner.username')
         fields = (
             'serie',
             'title',
@@ -30,6 +29,7 @@ class SermonSerializer(serializers.ModelSerializer):
         )
 
 class UserSerializer(serializers.ModelSerializer):
+    """User serializer"""
     series = serializers.PrimaryKeyRelatedField(many=True, queryset=Serie.objects.all())
 
     class Meta:

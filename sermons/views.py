@@ -1,22 +1,23 @@
+"""Sermon app views"""
 from django.http import Http404
+from django.contrib.auth.models import User
+from rest_framework import generics
+from rest_framework import permissions
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from .models import Serie, Sermon
 from .serializers import SermonSerializer, SerieSerializer, UserSerializer
-from django.contrib.auth.models import User
-from rest_framework import generics
-from rest_framework import permissions
+from .permissions import IsOwnerOrReadOnly
 
 class SerieList(APIView):
-    """
-    List all code series, or create a new serie.
-    """
+    """ List all code series, or create a new serie. """
     def get(self, request, format=None):
+        
         series = Serie.objects.all()
         serializer = SerieSerializer(series, many=True)
         return Response(serializer.data)
-
+    """
     def post(self, request, format=None):
         serializer = SerieSerializer(data=request.data)
         if serializer.is_valid():
@@ -26,8 +27,9 @@ class SerieList(APIView):
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
-
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    """
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,
+                      IsOwnerOrReadOnly,)
 
 class SerieDetail(APIView):
     """
@@ -43,7 +45,7 @@ class SerieDetail(APIView):
         serie = self.get_object(pk)
         serializer = SerieSerializer(serie)
         return Response(serializer.data)
-
+    """
     def put(self, request, pk, format=None):
         serie = self.get_object(pk)
         serializer = SerieSerializer(serie, data=request.data)
@@ -56,8 +58,9 @@ class SerieDetail(APIView):
         snippet = self.get_object(pk)
         snippet.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-    
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    """
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,
+                      IsOwnerOrReadOnly,)
 
 class UserList(generics.ListAPIView):
     queryset = User.objects.all()
