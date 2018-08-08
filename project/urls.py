@@ -20,6 +20,8 @@ from django.conf.urls import url, include
 urlpatterns = [
     url(r'^', include('sermons.urls')),
     url(r'^', include('events.urls')),
+    url(r'^', include('connects.urls')),
+    url(r'^', include('contact.urls')),
     path('admin/', admin.site.urls),
     url(r'^api-auth/', include('rest_framework.urls'))
 ]

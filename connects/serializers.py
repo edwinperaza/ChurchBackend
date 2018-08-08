@@ -1,19 +1,18 @@
-"""Sermon app serializer"""
+"""Contact app serializer"""
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from events.models import Event
+from connects.models import Connect
 
-class EventSerializer(serializers.ModelSerializer):
-    """Event serializer"""
+class ConnectSerializer(serializers.ModelSerializer):
+    """Contact serializer"""
     class Meta:
-        model = Event
+        model = Connect
         fields = (
             'title',
             'description',
-            'image_url',
-            'date_start',
-            'date_end',
+            'phone_number',
             'address',
+            'image_url',
             'url_more_info',
             'created',
         )

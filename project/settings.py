@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'sermons.apps.SermonsConfig',
     'events.apps.EventsConfig',
+    'connects.apps.ConnectsConfig',
+    'contact.apps.ContactConfig',
     'rest_framework',
 ]
 
