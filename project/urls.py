@@ -18,8 +18,8 @@ from django.urls import include, path
 from django.conf.urls import url, include
 
 urlpatterns = [
-    #path('sermons/', include('sermons.urls')),
     url(r'^', include('sermons.urls')),
+    url(r'^', include('events.urls')),
     path('admin/', admin.site.urls),
     url(r'^api-auth/', include('rest_framework.urls'))
 ]

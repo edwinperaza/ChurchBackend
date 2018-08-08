@@ -30,8 +30,9 @@ class SermonSerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
     """User serializer"""
-    series = serializers.PrimaryKeyRelatedField(many=True, queryset=Serie.objects.all())
+    #series = serializers.PrimaryKeyRelatedField(many=True, queryset=Serie.objects.all())
 
     class Meta:
         model = User
-        fields = ('id', 'username', 'series')
+        fields = ('id', 'username')
+        #fields = ('id', 'username', 'series')
