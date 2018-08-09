@@ -25,3 +25,6 @@ class Sermon(models.Model):
 
     class Meta:
         ordering = ('created',)
+
+    def __str__(self):
+        return self.title
