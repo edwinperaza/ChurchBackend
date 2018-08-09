@@ -22,9 +22,11 @@ class SermonSerializer(serializers.ModelSerializer):
         fields = (
             'serie',
             'title',
+            'pastor_name',
             'description',
             'video_url',
             'image_url',
+            'date',
             'created',
         )
 

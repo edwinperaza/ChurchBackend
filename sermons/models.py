@@ -16,9 +16,11 @@ class Sermon(models.Model):
     """Each video to show"""
     serie = models.ForeignKey(Serie, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
-    description = models.CharField(max_length=200)
+    pastor_name = models.CharField(max_length=200)
+    description = models.TextField()
     video_url = models.URLField(max_length=200)
     image_url = models.URLField(max_length=200)
+    date = models.DateTimeField()
     created = models.DateTimeField(auto_now_add=True)
 
     class Meta:
